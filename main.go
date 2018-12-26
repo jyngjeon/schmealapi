@@ -13,10 +13,10 @@ import (
 
 //SchoolMeal is struct of schmeal for output(GET)
 type SchoolMeal struct {
-	brkf []string
-	lnch []string
-	dinr []string
-	snck []string
+	Brkf []string
+	Lnch []string
+	Dinr []string
+	Snck []string
 	err  string
 }
 
@@ -24,7 +24,7 @@ var schmeal []SchoolMeal
 
 //GetMeal parses the meal info from school website
 func GetMeal() []soup.Root {
-	resp, err := soup.Get("http://www.hana.hs.kr/life/meal.asp")
+	resp, err := soup.Get("http://hana.hs.kr/life/meal.asp?yy=2018&mm=11")
 	fmt.Println("http transport error is:", err)
 
 	doc := soup.HTMLParse(resp)
@@ -43,10 +43,12 @@ func WriteMeal() SchoolMeal {
 		dinr := strings.Split(meal[2].Text(), ",")
 		snck := strings.Split(meal[3].Text(), ",")
 
-		sch.brkf = brkf
-		sch.lnch = lnch
-		sch.dinr = dinr
-		sch.snck = snck
+		sch.Brkf = brkf
+		sch.Lnch = lnch
+		sch.Dinr = dinr
+		sch.Snck = snck
+
+		fmt.Println(brkf)
 	} else {
 		sch.err = meal[0].Text()
 	}
