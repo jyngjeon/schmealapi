@@ -67,6 +67,3 @@ func main() {
 	router.HandleFunc("/schmeal", SendMeal).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
-
-//idk what is happening...
-//https://www.codementor.io/codehakase/building-a-restful-api-with-golang-a6yivzqdo
