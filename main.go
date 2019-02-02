@@ -24,7 +24,7 @@ var schmeal []SchoolMeal
 
 //GetMeal parses the meal info from school website
 func GetMeal() []soup.Root {
-	resp, err := soup.Get("http://hana.hs.kr/life/meal.asp")
+	resp, err := soup.Get("http://hana.hs.kr/life/meal.asp?yy=2018&mm=11")
 	fmt.Println("http transport error is:", err)
 
 	doc := soup.HTMLParse(resp)
