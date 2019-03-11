@@ -45,14 +45,32 @@ func WriteMeal() [4]string {
 }
 
 //SendMeal for api work
-func SendMeal(w http.ResponseWriter, r *http.Request) {
+func SendBrkf(w http.ResponseWriter, r *http.Request) {
 	schmeal := WriteMeal()
-	json.NewEncoder(w).Encode(schmeal)
+	json.NewEncoder(w).Encode(schmeal[0])
+}
+
+func SendLnch(w http.ResponseWriter, r *http.Request) {
+	schmeal := WriteMeal()
+	json.NewEncoder(w).Encode(schmeal[1])
+}
+
+func SendDinr(w http.ResponseWriter, r *http.Request) {
+	schmeal := WriteMeal()
+	json.NewEncoder(w).Encode(schmeal[2])
+}
+
+func SendSnck(w http.ResponseWriter, r *http.Request) {
+	schmeal := WriteMeal()
+	json.NewEncoder(w).Encode(schmeal[3])
 }
 
 // our main function
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/schmeal", SendMeal).Methods("GET")
+	router.HandleFunc("/schmeal/brkf", SendBrkf).Methods("GET")
+	router.HandleFunc("/schmeal/lnch", SendLnch).Methods("GET")
+	router.HandleFunc("/schmeal/dinr", SendDinr).Methods("GET")
+	router.HandleFunc("/schmeal/snck", SendSnck).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
